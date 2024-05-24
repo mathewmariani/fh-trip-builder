@@ -44,24 +44,24 @@ class AirportGateway
             :code,
             :name,
             :city,
-            :lat,
-            :lng,
-            :timezone,
-            :cityCode,
-            :countryCode,
-            :regionCode
+            :latitude,
+            :longitude,
+            :time_zone,
+            :city_code,
+            :country_code,
+            :region_code
         )";
 
         $stmt = $this->con->prepare($sql);
         $stmt->bindValue(":code", $data["code"], PDO::PARAM_STR);
         $stmt->bindValue(":name", $data["name"], PDO::PARAM_STR);
         $stmt->bindValue(":city", $data["city"], PDO::PARAM_STR);
-        $stmt->bindValue(":lat", $data["lat"], PDO::PARAM_STR);
-        $stmt->bindValue(":lng", $data["lng"], PDO::PARAM_STR);
-        $stmt->bindValue(":timezone", $data["timezone"], PDO::PARAM_STR);
-        $stmt->bindValue(":cityCode", $data["cityCode"], PDO::PARAM_STR);
-        $stmt->bindValue(":countryCode", $data["countryCode"], PDO::PARAM_STR);
-        $stmt->bindValue(":regionCode", $data["regionCode"], PDO::PARAM_STR);
+        $stmt->bindValue(":latitude", $data["latitude"], PDO::PARAM_STR);
+        $stmt->bindValue(":longitude", $data["longitude"], PDO::PARAM_STR);
+        $stmt->bindValue(":time_zone", $data["time_zone"], PDO::PARAM_STR);
+        $stmt->bindValue(":city_code", $data["city_code"], PDO::PARAM_STR);
+        $stmt->bindValue(":country_code", $data["countryCode"], PDO::PARAM_STR);
+        $stmt->bindValue(":region_code", $data["region_code"], PDO::PARAM_STR);
         $stmt->execute();
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -107,8 +107,8 @@ class AirportGateway
         $stmt->bindValue(":longitude", $new["lng"]);
         $stmt->bindValue(":timezone", $new["timezone"]);
         $stmt->bindValue(":city_code", $new["cityCode"]);
-        $stmt->bindValue(":country_code", $new["countryCode"]);
-        $stmt->bindValue(":region_code", $new["regionCode"]);
+        $stmt->bindValue(":country_code", $new["country_code"]);
+        $stmt->bindValue(":region_code", $new["region_code"]);
         $stmt->execute();
 
         return $stmt->rowCount();
@@ -123,7 +123,7 @@ class AirportGateway
         ";
 
         $stmt = $this->con->prepare($sql);
-        $stmt->bindValue(":iac", $code, PDO::PARAM_STR);
+        $stmt->bindValue(":code", $code, PDO::PARAM_STR);
         $stmt->execute();
 
         return $stmt->rowCount();

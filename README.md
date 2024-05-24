@@ -40,9 +40,9 @@ From here HTTP requests can be sent to the web service using Postman.
 | GET    | /flights      | DONE   |
 | GET    | /onewaytrip   | DONE   |
 | GET    | /roundtrip    | DONE   |
-| POST   | /airlines     | ----   |
-| POST   | /airports     | ----   |
-| POST   | /flights      | ----   |
+| POST   | /airlines     | DONE   |
+| POST   | /airports     | DONE   |
+| POST   | /flights      | DONE   |
 | DELETE | /airlines     | ----   |
 | DELETE | /airports     | ----   |
 | DELETE | /flights      | DONE   |

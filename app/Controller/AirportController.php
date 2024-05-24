@@ -23,6 +23,18 @@ class AirportController
                 }
                 http_response_code(200);
                 break;
+            case "POST":
+                $errors = $this->getValidationErrors($_POST);
+                if(!empty($errors))
+                {
+                    http_response_code(422);
+                    echo json_encode(["errors" => $errors]);
+                    break;
+                }
+                $this->gateway->create($_POST);
+                echo json_encode(["message" => "Airport added."]);
+                http_response_code(201);
+                break;
             default:
                 http_response_code(405);
                 header("Allow: GET, POST");
@@ -34,39 +46,39 @@ class AirportController
         $errors = [];
         if (empty($data["code"]))
         {
-            $errors[] = "Airport Code is Empty";
+            $errors[] = "Airport code is empty!";
         }
         if (empty($data["name"]))
         {
-            $errors[] = "Airport Name is Empty!";
+            $errors[] = "Airport name is empty!";
         }
         if (empty($data["city"]))
         {
-            $errors[] = "Airport City is Empty!";
+            $errors[] = "Airport city is empty!";
         }
-        if (empty($data["lat"]))
+        if (empty($data["latitude"]))
         {
-            $errors[] = "Airport Latitude is Empty!";
+            $errors[] = "Airport latitude is empty!";
         }
-        if (empty($data["lng"]))
+        if (empty($data["longitude"]))
         {
-            $errors[] = "Airport Longitude is Empty!";
+            $errors[] = "Airport longitude is empty!";
         }
         if (empty($data["timezone"]))
         {
-            $errors[] = "Airport Timezone is Empty!";
+            $errors[] = "Airport timezone is empty!";
         }
-        if (empty($data["cityCode"]))
+        if (empty($data["city_code"]))
         {
-            $errors[] = "Airport City Code is Empty!";
+            $errors[] = "Airport city code is empty!";
         }
-        if (empty($data["countryCode"]))
+        if (empty($data["country_code"]))
         {
-            $errors[] = "Airport Country Code is Empty!";
+            $errors[] = "Airport country code is empty!";
         }
-        if (empty($data["regionCode"]))
+        if (empty($data["region_code"]))
         {
-            $errors[] = "Airport Region Code is Empty!";
+            $errors[] = "Airport region code is empty!";
         }
         return $errors;
     }

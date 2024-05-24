@@ -23,6 +23,18 @@ class FlightController
                 }
                 http_response_code(200);
                 break;
+            case "POST":
+                $errors = $this->getValidationErrors($_POST);
+                if(!empty($errors))
+                {
+                    http_response_code(422);
+                    echo json_encode(["errors" => $errors]);
+                    break;
+                }
+                $this->gateway->create($_POST);
+                echo json_encode(["message" => "Flight added."]);
+                http_response_code(201);
+                break;
             case "DELETE":
                 if (isset($_GET['number']))
                 {
@@ -45,31 +57,31 @@ class FlightController
         $errors = [];
         if (empty($data["airline"]))
         {
-            $errors[] = "Flight Airline is Empty";
+            $errors[] = "Flight airline is empty!";
         }
         if (empty($data["number"]))
         {
-            $errors[] = "Flight Number is Empty!";
+            $errors[] = "Flight number is empty!";
         }
         if (empty($data["departure_airport"]))
         {
-            $errors[] = "Flight Departure Airport is Empty!";
+            $errors[] = "Flight departure airport is empty!";
         }
         if (empty($data["departure_time"]))
         {
-            $errors[] = "Flight Departure Time is Empty!";
+            $errors[] = "Flight departure time is empty!";
         }
         if (empty($data["arrival_airport"]))
         {
-            $errors[] = "Flight Arrival Airport is Empty!";
+            $errors[] = "Flight arrival airport is empty!";
         }
         if (empty($data["arrival_time"]))
         {
-            $errors[] = "Flight Arrival Time is Empty!";
+            $errors[] = "Flight arrival time is empty!";
         }
         if (empty($data["price"]))
         {
-            $errors[] = "Flight Price is Empty!";
+            $errors[] = "Flight price is empty!";
         }
         return $errors;
     }

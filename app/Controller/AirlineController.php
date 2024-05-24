@@ -23,9 +23,21 @@ class AirlineController
                 }
                 http_response_code(200);
                 break;
+            case "POST":
+                $errors = $this->getValidationErrors($_POST);
+                if(!empty($errors))
+                {
+                    http_response_code(422);
+                    echo json_encode(["errors" => $errors]);
+                    break;
+                }
+                $this->gateway->create($_POST);
+                echo json_encode(["message" => "Airline added."]);
+                http_response_code(201);
+                break;
             default:
                 http_response_code(405);
-                header("Allow: GET");
+                header("Allow: GET, POST");
         }
     }
 
@@ -34,11 +46,11 @@ class AirlineController
         $errors = [];
         if (empty($data["code"]))
         {
-            $errors[] = "Airport Code is Empty";
+            $errors[] = "Airport code is empty!";
         }
         if (empty($data["name"]))
         {
-            $errors[] = "Airport Name is Empty!";
+            $errors[] = "Airport name is empty!";
         }
         return $errors;
     }
