@@ -35,9 +35,22 @@ class AirportController
                 echo json_encode(["message" => "Airport added."]);
                 http_response_code(201);
                 break;
+            case "DELETE":
+                if (!isset($_GET['code']))
+                {
+                    echo json_encode(["error" => "Missing airport code."]);
+                    http_response_code(400);
+                    break;
+                }
+                $rows = $this->gateway->delete($_GET['code']);
+                echo json_encode([
+                    "message" => "Airport was deleted successfully.",
+                    "rows"=> $rows
+                ]);
+                break;
             default:
                 http_response_code(405);
-                header("Allow: GET, POST");
+                header("Allow: GET, POST, DELETE");
         }
     }
 

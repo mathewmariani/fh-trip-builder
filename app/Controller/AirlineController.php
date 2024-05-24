@@ -35,9 +35,22 @@ class AirlineController
                 echo json_encode(["message" => "Airline added."]);
                 http_response_code(201);
                 break;
+            case "DELETE":
+                if (!isset($_GET['code']))
+                {
+                    echo json_encode(["error" => "Missing airline code."]);
+                    http_response_code(400);
+                    break;
+                }
+                $rows = $this->gateway->delete($_GET['code']);
+                echo json_encode([
+                    "message" => "Airline was deleted successfully.",
+                    "rows"=> $rows
+                ]);
+                break;
             default:
                 http_response_code(405);
-                header("Allow: GET, POST");
+                header("Allow: GET, POST, DELETE");
         }
     }
 
@@ -46,11 +59,11 @@ class AirlineController
         $errors = [];
         if (empty($data["code"]))
         {
-            $errors[] = "Airport code is empty!";
+            $errors[] = "Airline code is empty!";
         }
         if (empty($data["name"]))
         {
-            $errors[] = "Airport name is empty!";
+            $errors[] = "Airline name is empty!";
         }
         return $errors;
     }

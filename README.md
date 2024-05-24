@@ -43,6 +43,6 @@ From here HTTP requests can be sent to the web service using Postman.
 | POST   | /airlines     | DONE   |
 | POST   | /airports     | DONE   |
 | POST   | /flights      | DONE   |
-| DELETE | /airlines     | ----   |
-| DELETE | /airports     | ----   |
+| DELETE | /airlines     | DONE   |
+| DELETE | /airports     | DONE   |
 | DELETE | /flights      | DONE   |
