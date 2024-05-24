@@ -46,11 +46,11 @@ class AirlineGateway
         $sql = "
         INSERT INTO airlines (
             code,
-            name,
+            name
         ) 
         VALUES (
             :code,
-            :name,
+            :name
         )";
 
         $stmt = $this->con->prepare($sql);

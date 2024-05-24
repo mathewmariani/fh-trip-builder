@@ -101,14 +101,14 @@ class AirportGateway
     
         $stmt = $this->con->prepare($sql);
         $stmt->bindValue(":code", $new["code"], PDO::PARAM_STR);
-        $stmt->bindValue(":name", $new["name"]);
-        $stmt->bindValue(":city", $new["city"]);
-        $stmt->bindValue(":latitude", $new["lat"]);
-        $stmt->bindValue(":longitude", $new["lng"]);
-        $stmt->bindValue(":timezone", $new["timezone"]);
-        $stmt->bindValue(":city_code", $new["cityCode"]);
-        $stmt->bindValue(":country_code", $new["country_code"]);
-        $stmt->bindValue(":region_code", $new["region_code"]);
+        $stmt->bindValue(":name", $new["name"], PDO::PARAM_STR);
+        $stmt->bindValue(":city", $new["city"], PDO::PARAM_STR);
+        $stmt->bindValue(":latitude", $new["lat"], PDO::PARAM_STR);
+        $stmt->bindValue(":longitude", $new["lng"], PDO::PARAM_STR);
+        $stmt->bindValue(":timezone", $new["timezone"], PDO::PARAM_STR);
+        $stmt->bindValue(":city_code", $new["cityCode"], PDO::PARAM_STR);
+        $stmt->bindValue(":country_code", $new["country_code"], PDO::PARAM_STR);
+        $stmt->bindValue(":region_code", $new["region_code"], PDO::PARAM_STR);
         $stmt->execute();
 
         return $stmt->rowCount();
